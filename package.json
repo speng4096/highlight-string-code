@@ -89,6 +89,27 @@
                 }
             }
         ],
+        "configurationDefaults": {
+            "[go]": {
+                "editor.semanticHighlighting.enabled": false
+            },
+            "editor.tokenColorCustomizations": {
+                "textMateRules": [
+                    {
+                        "scope": "meta.embedded.block.sql",
+                        "settings": {
+                            "foreground": "#A9D3AB"
+                        }
+                    },
+                    {
+                        "scope": "meta.embedded.block.hive",
+                        "settings": {
+                            "foreground": "#A9D3AB"
+                        }
+                    }
+                ]
+            }
+        },
         "snippets": [
             {
                 "language": "",
@@ -96,6 +117,13 @@
             }
         ]
     },
+    "activationEvents": [
+        "onLanguage:go",
+        "onLanguage:python",
+        "onLanguage:java",
+        "onLanguage:php"
+    ],
+    "main": "./extension.js",
     "scripts": {
         "build": "node ./build/build",
         "genSnippets": "node ./build/generateSnippets"

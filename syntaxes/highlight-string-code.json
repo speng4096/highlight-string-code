@@ -1,7 +1,7 @@
 {
     "scopeName": "highlight-string-code",
     "name": "source.stringcode",
-    "injectionSelector": "L:source - (meta.embedded), L:text - (mate.embedded)",
+    "injectionSelector": "L:source - (meta.embedded), L:text - (meta.embedded)",
     "patterns": [
         {
             "include": "#highlight-string-css"
@@ -165,7 +165,53 @@
                     ]
                 },
                 {
-                    "begin": "\\s*(SELECT|INSERT|DELETE|UPDATE|DROP|ALTER|CREATE|SET|TRUNCATE|GRANT|REVOKE)\\s",
+                    "begin": "(\")\\s*(?i:(SELECT|INSERT|DELETE|UPDATE|DROP|ALTER|CREATE|SET|TRUNCATE|GRANT|REVOKE))\\b",
+                    "end": "(?<!\\\\)\"",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "string.quoted.double.go"
+                        },
+                        "2": {
+                            "name": "meta.embedded.block.sql keyword.other.DML.sql"
+                        }
+                    },
+                    "endCaptures": {
+                        "0": {
+                            "name": "string.quoted.double.go"
+                        }
+                    },
+                    "contentName": "meta.embedded.block.sql",
+                    "patterns": [
+                        {
+                            "include": "source.sql"
+                        }
+                    ]
+                },
+                {
+                    "begin": "(`)\\s*(?i:(SELECT|INSERT|DELETE|UPDATE|DROP|ALTER|CREATE|SET|TRUNCATE|GRANT|REVOKE))\\b",
+                    "end": "(`)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "string.quoted.raw.go"
+                        },
+                        "2": {
+                            "name": "meta.embedded.block.sql keyword.other.DML.sql"
+                        }
+                    },
+                    "endCaptures": {
+                        "1": {
+                            "name": "string.quoted.raw.go"
+                        }
+                    },
+                    "contentName": "meta.embedded.block.sql",
+                    "patterns": [
+                        {
+                            "include": "source.sql"
+                        }
+                    ]
+                },
+                {
+                    "begin": "(?i:\\s*(SELECT|INSERT|DELETE|UPDATE|DROP|ALTER|CREATE|SET|TRUNCATE|GRANT|REVOKE))\\s",
                     "end": "(;)",
                     "beginCaptures": {
                         "1": {
